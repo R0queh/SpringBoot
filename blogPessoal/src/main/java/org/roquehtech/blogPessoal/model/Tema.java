@@ -1,4 +1,4 @@
-package com.drugs.main.model;
+package org.roquehtech.blogPessoal.model;
 
 import java.util.List;
 
@@ -10,27 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "tb_drugs")
-public class Drugs {
+@Table(name ="tb_tema")
+public class Tema {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@NotBlank
-	@Size(min = 6, max = 100)
 	private String descricao;
 	
-	@NotNull
-	private boolean ativo;
+	@OneToMany(mappedBy="tema" ,cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("tema")
+	private List<Postagem> postagem;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "drugs")
-	private List<Produto> produto;
-	
 	public long getId() {
 		return id;
 	}
@@ -47,20 +44,13 @@ public class Drugs {
 		this.descricao = descricao;
 	}
 
-	public boolean isAtivo() {
-		return ativo;
+	public List<Postagem> getPostagem() {
+		return postagem;
 	}
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
 	}
 	
-	public List<Produto> getProduto() {
-		return produto;
-	}
-
-	public void setProduto(List<Produto> produto) {
-		this.produto = produto;
-	}
-
+	
 }

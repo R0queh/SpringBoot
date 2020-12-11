@@ -1,4 +1,4 @@
-package com.drugs.main.model;
+package com.escola.escola.model;
 
 import java.util.List;
 
@@ -10,27 +10,28 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-@Table(name = "tb_drugs")
-public class Drugs {
-	
+@Table(name = "tb_classe")
+public class Classe {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@NotBlank
-	@Size(min = 6, max = 100)
-	private String descricao;
+	@Size(min = 3, max = 12)
+	private String turma;
 	
-	@NotNull
 	private boolean ativo;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "drugs")
-	private List<Produto> produto;
 	
+	@OneToMany(mappedBy = "classe" , cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("classe")
+	private List<Aluno> aluno;
+
 	public long getId() {
 		return id;
 	}
@@ -39,12 +40,12 @@ public class Drugs {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getTurma() {
+		return turma;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setTurma(String turma) {
+		this.turma = turma;
 	}
 
 	public boolean isAtivo() {
@@ -55,12 +56,6 @@ public class Drugs {
 		this.ativo = ativo;
 	}
 	
-	public List<Produto> getProduto() {
-		return produto;
-	}
-
-	public void setProduto(List<Produto> produto) {
-		this.produto = produto;
-	}
-
+	
+	
 }

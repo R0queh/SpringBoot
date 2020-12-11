@@ -1,4 +1,4 @@
-package com.drugs.main.model;
+package com.escola.escola.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,27 +11,23 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
-
 @Entity
-@Table(name = "tb_produto")
-public class Produto {
+@Table(name = "tb_aluno")
+public class Aluno {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@NotBlank
-	@Size(min=3, max = 30)
+	@Size(min = 3, max = 50)
 	private String nome;
 	
-	private double preco;
-
+	private boolean matricula;
+	
 	@ManyToOne
-	@JsonIgnoreProperties("produto")
-	public Drugs drug;
-	
-	
+	@JsonIgnoreProperties("alunos")
+	private Classe classe;
 
 	public long getId() {
 		return id;
@@ -49,14 +45,20 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public double getPreco() {
-		return preco;
+	public boolean isMatricula() {
+		return matricula;
 	}
 
-	public void setPreco(double preco) {
-		this.preco = preco;
+	public void setMatricula(boolean matricula) {
+		this.matricula = matricula;
 	}
 	
-	
+	public Classe getClasse() {
+		return classe;
+	}
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}
 
 }
