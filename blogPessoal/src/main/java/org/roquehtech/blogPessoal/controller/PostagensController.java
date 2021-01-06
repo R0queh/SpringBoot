@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController //informa que se trata de um controlador
 @RequestMapping("/postagens") // por qual url a classe será acessada
-@CrossOrigin("*") //essa classe aceita requisições de qualqeur origem por exemplo talvez noss ofront venha de angular ou de react e são origens diferentes e por isso precisamos de cross origin 
+@CrossOrigin(origins =  "*", allowedHeaders = "*") //essa classe aceita requisições de qualqeur origem por exemplo talvez noss ofront venha de angular ou de react e são origens diferentes e por isso precisamos de cross origin 
 public class PostagensController {
 	
 	@Autowired //não podemos intanciar uma interface entaõ deixamos a responsavilidade de instanciação com o spring com esse comando 
